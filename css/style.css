@@ -1,3 +1,12 @@
 body {
 	font-family: 'Poppins', sans-serif;
+	background-color: #121212;
+	color: hsl(0, 0%, 87%);
+}
+/**
+* Search input
+*/
+.input-group {
+	width: clamp(40%, 450px, 100%);
+	margin: 0 auto;
 }

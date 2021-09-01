@@ -12,11 +12,41 @@
 	<link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-	<header>
+	<header class="py-5">
 		<div class="container">
-			<h1 class="text-center">Search Book</h1>
+			<h1 class="text-center mb-4">Search Book</h1>
+
+			<!-- search input -->
+			<div class="input-group">
+				<input type="text" id="search_input" class="form-control" placeholder="Enter a Book name">
+				<button onclick="searchBooks()" class="btn btn-primary text-light" type="button">Button</button>
+			</div>
 		</div>
 	</header>
+
+	<main>
+		<div class="container">
+			<!-- notice box -->
+			<div id="notice_box" class="text-center"></div>
+
+			<!-- search result -->
+			<div id="search_result" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+				<!-- <div class="col">
+					<div class="card h-100 bg-light">
+						<img src="http://placeimg.com/640/480/any" class="card-img-top" alt="...">
+						<div class="card-body text-dark">
+							<h4 class="card-title">PHP Manual, Volume 2</h4>
+							<cite><b>Author :</b> Fazle Rabbi</cite>
+						</div>
+						<div class="card-footer">
+							<small class="d-block text-muted">First publish year: <span class="text-dark">2000</span></small>
+							<small class="d-block text-muted">Publisher: <span class="text-dark">Iuniverse Inc</span></small>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</main>
 
 
 	<!-- script -->
