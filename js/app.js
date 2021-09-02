@@ -7,7 +7,7 @@ const loadingSpinner = displayStyle => {
 const noticeText = (text, colorClass) => {
 	const noticeBox = document.getElementById('notice_box');
 	noticeBox.innerHTML = `
-		<h5 class="${colorClass} mb-5">${text}</h5>
+		<h4 class="${colorClass} mb-5">${text}</h4>
 	`;
 };
 
@@ -26,7 +26,6 @@ const searchBooks = async () => {
 		noticeText('Type something before search.', 'text-danger');
 	} else {
 		loadingSpinner('block');
-
 		const url = `https://openlibrary.org/search.json?q=${searchText}`;
 		try {
 			const res = await fetch(url);
@@ -34,7 +33,7 @@ const searchBooks = async () => {
 			displayBooks(data.docs);
 		} catch (err) {
 			console.log(err);
-			noticeText('Something went wrong. Try again later.', 'text-danger');
+			noticeText(`Something went wrong!<br> Try again later.`, 'text-danger');
 			loadingSpinner('none');
 		}
 	}
@@ -53,7 +52,7 @@ const displayBooks = books => {
 			singleBook.innerHTML = `
 				<div class="card h-100 bg-light">
 					<div class="cover-image p-3 d-flex align-items-center justify-content-center">
-						${book.cover_i ? `<img src="https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg" alt="${book.title}">` : noDataText}
+						${book.cover_i ? `<img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" alt="${book.title}">` : noDataText}
 					</div>
 					<div class="card-body pt-0 text-dark">
 						<h4 class="card-title">${book.title}</h4>
