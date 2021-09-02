@@ -1,7 +1,7 @@
 // loading spinner
 const loadingSpinner = displayStyle => {
 	document.getElementById('loading_spinner').style.display = displayStyle;
-}
+};
 
 // notice text
 const noticeText = (text, colorClass) => {
@@ -9,7 +9,7 @@ const noticeText = (text, colorClass) => {
 	noticeBox.innerHTML = `
 		<h5 class="${colorClass} mb-5">${text}</h5>
 	`;
-}
+};
 
 // search books
 const searchBooks = async () => {
@@ -21,40 +21,39 @@ const searchBooks = async () => {
 	document.getElementById('notice_box').textContent = '';
 	// clear previous search result
 	document.getElementById('search_result').textContent = '';
-	
-	if(searchText === '') {
+
+	if (searchText === '') {
 		noticeText('Type something before search.', 'text-danger');
 	} else {
 		loadingSpinner('block');
 
-		const url = `http://openlibrary.org/search.json?q=${searchText}`;
+		const url = `https://openlibrary.org/search.json?q=${searchText}`;
 		try {
 			const res = await fetch(url);
 			const data = await res.json();
-			displayBooks(data);
+			displayBooks(data.docs);
 		} catch (err) {
 			console.log(err);
 			noticeText('Something went wrong. Try again later.', 'text-danger');
 			loadingSpinner('none');
 		}
 	}
-}
+};
 
 // display books
-const displayBooks = data => {
-	console.log(data);
-	const books = data.docs;
+const displayBooks = books => {
+	// console.log(books);
 	const booksContainer = document.getElementById('search_result');
-
-	if(books && books.length > 0) {
-		books.forEach(book => {
+	if (books && books.length > 0) {
+		const booksToShow = books.length > 30 ? books.slice(0, 30) : books;
+		booksToShow.forEach(book => {
 			const noDataText = `<span class="text-danger">not available.</span>`;
 			const singleBook = document.createElement('div');
 			singleBook.classList.add('col');
 			singleBook.innerHTML = `
 				<div class="card h-100 bg-light">
 					<div class="cover-image p-3 d-flex align-items-center justify-content-center">
-						${book.cover_i ? `<img src="https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg" class="card-img-top" alt="${book.title}">` : noDataText}
+						${book.cover_i ? `<img src="https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg" alt="${book.title}">` : noDataText}
 					</div>
 					<div class="card-body pt-0 text-dark">
 						<h4 class="card-title">${book.title}</h4>
@@ -73,7 +72,7 @@ const displayBooks = data => {
 		});
 		// show result number text
 		const resultNumberText = `
-			Showing <span class="px-2 bg-success text-light rounded">${books.length}</span> results out of <span class="p-y1 px-2 bg-success text-light rounded">${data.numFound}</span>
+			Showing <span class="px-2 bg-success text-light rounded">${booksToShow.length}</span> results out of <span class="px-2 bg-success text-light rounded">${books.length}</span>
 		`;
 		noticeText(resultNumberText, 'text-success');
 		// hide loading spinner
@@ -82,4 +81,13 @@ const displayBooks = data => {
 		noticeText('Oops, no result found!', 'text-warning');
 		loadingSpinner('none');
 	}
-}
+};
+
+// trigger search on pressing the Enter key
+document.getElementById('search_input').addEventListener('keyup', event => {
+	let key = event.key || event.code || event.keyCode;
+	if (key === 'Enter' || key === 13) {
+		event.preventDefault();
+		searchBooks();
+	}
+});
