@@ -10,3 +10,32 @@ body {
 	width: clamp(40%, 450px, 100%);
 	margin: 0 auto;
 }
+.input-group input::placeholder {
+	font-size: 95%;
+}
+/**
+* Search result
+*/
+.cover-image {
+	height: 200px;
+	width: 100%;
+}
+.cover-image > img {
+	height: 100%;
+	width: auto;
+	max-width: 100%;
+}
+/**
+* Loading spinner
+*/
+#loading_spinner {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+}
+.spinner-border {
+	width: 3rem;
+	height: 3rem;
+}

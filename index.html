@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Book Archive</title>
 
+	<!-- favicon -->
+	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+
 	<!-- bootstrap css -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 	<!-- custom css -->
@@ -18,33 +21,26 @@
 
 			<!-- search input -->
 			<div class="input-group">
-				<input type="text" id="search_input" class="form-control" placeholder="Enter a Book name">
-				<button onclick="searchBooks()" class="btn btn-primary text-light" type="button">Button</button>
+				<input type="text" id="search_input" class="form-control" placeholder="Type a Book name e.g. dracula">
+				<button onclick="searchBooks()" class="btn btn-primary text-light" type="button">Search</button>
 			</div>
 		</div>
 	</header>
 
 	<main>
-		<div class="container">
+		<div class="container position-relative mb-5">
+			<!-- loading spinner -->
+			<div id="loading_spinner">
+				<div class="spinner-border text-primary text-center" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</div>
+
 			<!-- notice box -->
 			<div id="notice_box" class="text-center"></div>
 
 			<!-- search result -->
-			<div id="search_result" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
-				<!-- <div class="col">
-					<div class="card h-100 bg-light">
-						<img src="http://placeimg.com/640/480/any" class="card-img-top" alt="...">
-						<div class="card-body text-dark">
-							<h4 class="card-title">PHP Manual, Volume 2</h4>
-							<cite><b>Author :</b> Fazle Rabbi</cite>
-						</div>
-						<div class="card-footer">
-							<small class="d-block text-muted">First publish year: <span class="text-dark">2000</span></small>
-							<small class="d-block text-muted">Publisher: <span class="text-dark">Iuniverse Inc</span></small>
-						</div>
-					</div>
-				</div> -->
-			</div>
+			<div id="search_result" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4"></div>
 		</div>
 	</main>
 
